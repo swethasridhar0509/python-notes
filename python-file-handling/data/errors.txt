@@ -1,0 +1,9 @@
+1. FileNotFoundError: [Errno 2] No such file or directory: 'test-file.txt'
+Trying to open a file that does not exist in read mode and r+ (or) incorrect filename.
+
+2. FileExistsError: [Errno 17] File exists: 'test.txt'
+Trying to rename with an existing name. (or) To create a file with an existing name in "x" mode.
+
+3. io.UnsupportedOperation: not writable
+Trying to perform write in read only mode.
+
