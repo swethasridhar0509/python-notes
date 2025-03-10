@@ -1,7 +1,8 @@
 ## **Variable in Python**
 
-- Variables are named references to an object stored in the heap memory.
+- Variables are **named references** to an object stored in the **heap memory**.
 - **Purpose** - Eliminate the need to handle memory addresses directly and code reusability.
+- **Properties:** - Variables does not store values, they refer to it and Variables have dynamic type.
 
 ## **Dynamically Typed**
 
@@ -22,43 +23,54 @@
 - The value in this construct can be any Python object.
 - **Standard Assignment:**  `name = "Alice"`
 
-## **Parallel or Chained Assignment**
+## **Parallel and Chained Assignment**
 
-- Allows multiple assignments in a single line.
-- Involves assigning a single value to multiple variables.
-- `left_ptr, right_ptr = 0`
+1. **Chained Assignment:** Involves assigning a single value to multiple variables.
+`left_ptr = right_ptr = 0`
+2. **Parallel Assignment (Tuple Unpacking):** Invloves assigning multiple values to multiple variables.
+`left_ptr, right_ptr = 1, 0`
 
 ## **Iterable Unpacking**
 
-- Distributing values of an iterable to separate variables.
-- `_variable_1, _variable_2 = iterable`
+1. Distributing values of an iterable to separate variables.
+`_variable_1, _variable_2 = iterable`
 
 ```python
-In [17]: person = 'Jane doe', '20'
-In [18]: name, age = person
-In [19]: name
-Out[19]: 'Jane doe'
+person = 'Jane doe', '20'
+name, age = person
+print(name) # 'Jane doe'
 ```
+2. **Flexible Unpacking:** Use **\*** for flexible unpacking.
+   
+```python
+a, *b, c = [1, 2, 3, 4, 5]
+print(a, b, c) # 1, [2, 3, 4], 5
+```
+## Deleting Variable
+- `del` keyword is used to delete the variable reference not the actual objects.
+`del x`
 
 ## **Naming Rules for Variables**
 
-1. Variables can be any length and can consist of uppercase letters (`A-Z`) and lowercase letters (`a-z`), digits (`0-9`), and the underscore (`_`).
+1. Variables can be any length and can consist -Letters (`A-Z`)(`a-z`), digits (`0-9`), and the underscore (`_`).
 2. Cannot start with digits.
-3. No special characters. `π = 3.14`
-4. Cannot use Python **keywords** (e.g., `if`, `True`, `def`).
+3. Cannot use Python **keywords** (e.g., `if`, `True`, `def`).
+4. Variables are case-sensitive.
 
 ## **Best Practices**
 
-- Variables/Functions: `snake_case` (e.g., `calculate_area`)
-- Classes: `PascalCase` (e.g., `UserProfile`)
-- Constants: `UPPERCASE` (e.g., `PI`).
-- Plural names for iterables.
-- Use **single underscores** for private attributes or methods.
+1. Variables should be descriptive.
+2. **Variables/Functions:** `snake_case` (e.g., `calculate_area`) 'camelCase` (e.g., `calculateArea`).
+3. **Classes:** `PascalCase` (e.g., `UserProfile`)
+4. **Constants:** `UPPERCASE` (e.g., `PI`).
+5. Plural names for iterables.
+6. Use **single underscores** for private attributes or methods. (e.g., `_amount` = 1000)
 
 ## **Common Errors**
 
-- Using keywords as variables will throw `SyntaxError`.
-- Overwriting built-in functions or types (e.g., `list`, `str`, `print`) can lead to unintended behavior and can cause `TypeError`.
-- Undefined variables can cause `NameError`.
-- Conflicting local and global variables could cause `UnboundLocalError`.
-- Soft keywords are **context-dependent** keywords that act as keywords only in specific situations but can be used as variable names elsewhere.
+1. Using keywords as variables will throw `SyntaxError`.
+2. Overwriting built-in functions or types (e.g., `list`, `str`, `print`) can lead to unintended behavior and can cause `TypeError`.
+3. Undefined variables can cause `NameError`.
+4. Conflicting local and global variables could cause `UnboundLocalError`.
+5. Soft keywords are **context-dependent** keywords that act as keywords only in specific situations but can be used as variable names elsewhere. (eg., `match`)
+6. Incorrect unpacking will lead to `ValueError`.
