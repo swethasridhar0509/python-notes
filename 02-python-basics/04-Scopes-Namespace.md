@@ -1,6 +1,17 @@
-### **Understanding Scope in Python**  
+## **Scope and Namespace**  
+### Scope
+- Scope refers to the area of a program where a variable, function or any object is accessible.
+- It determines the **visibility** (accessible) and **lifetime** (existence in memory) of an object.
+- Scopes helps with **naming conflicts**.
+- There are 4 scopes in Python.
+- The **location** at which the **object is created** is used associate it with a scope.
+- In python, scopes are implemented using **namespace**.
 
-**Scope** defines where a variable is accessible within a program.  
+### Namespace
+- Namespace are dictionaries with name, object mapping.
+- Each scope has a namespace with different lifetimes.
+- When executing a program, python creates namespaces as required and deletes it later.
+  
 
 ### **Types of Scope**  
 
