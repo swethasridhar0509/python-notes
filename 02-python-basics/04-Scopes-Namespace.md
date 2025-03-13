@@ -1,105 +1,103 @@
 ## **Scope and Namespace**  
+The term **Name** refers to the identifiers of variables, constants, function, classes, or any python objects.  
+
 ### Scope
-- Scope refers to the area of a program where a variable, function or any object is accessible.
-- It determines the **visibility** (accessible) and **lifetime** (existence in memory) of an object.
-- Scopes helps with **naming conflicts**.
-- There are 4 scopes in Python.
-- The **location** at which the **object is created** is used associate it with a scope.
-- In python, scopes are implemented using **namespace**.
+- **Scope of a name** refers to the area of the program where a name is **accessible**.
+- Scope determines the **lifetime** (how long it is stored in memory) and **visibility** (accessibility) of a name.
+- There are **4** scopes - Local, Global, Enclosing and built-in
+- Python uses the **location** of assignment or definition to associate a name with a scope.
 
-### Namespace
-- Namespace are dictionaries with name, object mapping.
-- Each scope has a namespace with different lifetimes.
-- When executing a program, python creates namespaces as required and deletes it later.
+### Advantages of Scope
+1. Avoid naming conflicts.
+2. Restricts bad usage of global names.
+3. Better code organization.
   
+### Namespaces
+- Namespaces are containers with names and objects associated with the names.
+- Namespaces are implemented as dictionaries.
+- The concept of scope is implemented using namespaces.
+- Namespaces can also be manually created by creating modules and importing it.
+- Python creates namespaces as required an deletes it later.
+  
+### LEGB Rule
 
-### **Types of Scope**  
+- Python uses the **LEGB rule** to resolve variables in a program.
+- It first looks for the variable in the local scope, then enclosing scope, then global and finally builtin scope.
+- If the **variable is found**, the first occurence is returned else throws `NameError`.
 
-1️. **Local Scope** (Inside a Function)  
-   - Variables declared inside a function are **local** to that function.  
-   ```python
-   def my_function():
-       x = 10  # Local scope
-       print(x)
+## Types of scope and namespaces
 
-   my_function()
-   print(x)  # ❌ Error: x is not defined outside
-   ```
+### Functions: The Local Scope
 
-2️. **Enclosing Scope (Nonlocal Scope)**  
-   - When a function is inside another function, the inner function can access the outer function’s variables (but not modify them without `nonlocal`).  
-   ```python
-   def outer():
-       a = 5  # Enclosing scope
+1. **Functions & Local Scope:** Local Scope (namespace) or function scope is created when a function is called.
+2. **Creation:** A new local scope is created for each function call.
+3. **Lifetime:** Local scope is destroyed when the function returns.
+4. **Local variables:** Parameters and variables assigned in the function exist only within the local scope associated with the function call.
+5. **NameError:** Trying to access the local variables outside the function throws `NameError`.
+6. **Avoiding Naming conflicts:** Seperate local scopes allows different functions to use the same variable names without conflict.
+7. `locals()`: Returns a dictionary of the current local namespace.
 
-       def inner():
-           nonlocal a  # Allows modification of enclosing variable
-           a += 1
-           print(a)
+``` python
+def square(base):
+    result = base ** 2
+    print(f"Square of {base} : {result}")
+    print(locals()) # Access local namespace
 
-       inner()
-
-   outer()  # 6
-   ```
-
-3️. **Global Scope** (Accessible Everywhere)  
-   - Variables defined outside functions/classes are **global** and can be accessed inside functions using `global` if modification is needed.  
-   ```python
-   x = 100  # Global scope
-
-   def my_function():
-       global x
-       x += 10  # Modifying global variable
-       print(x)
-
-   my_function()  # 110
-   ```
-
-4️. **Built-in Scope** (Python's Reserved Keywords & Functions)  
-   - Functions like `print()`, `len()`, `sum()` are part of Python’s built-in scope and can be used anywhere.  
-   ```python
-   print(len([1, 2, 3]))  # Built-in function
-   ```
-
----
-
-### **Scope Lookup Rule (LEGB Rule)**
-Python follows the **LEGB** rule to resolve variable names:  
-1️. **Local** – Inside the function.  
-2️. **Enclosing** – Variables from outer function scopes.  
-3️. **Global** – Variables at the script/module level.  
-4️. **Built-in** – Predefined Python functions.  
-
-Example:  
-```python
-x = "global"
-
-def outer():
-    x = "enclosing"
-
-    def inner():
-        x = "local"
-        print(x)  # "local" (LEGB applies)
-
-    inner()
-
-outer()
+# using the same variable names due to separate local scope
+def cube(base):
+    result = base ** 3
+    print(f"Cube of {base} : {result}")
+    print(locals())
 ```
-- Python first checks **Local**, then **Enclosing**, then **Global**, and finally **Built-in**.
-
----
-
-### **Common Scope Pitfalls**
- **Modifying Global Variables Without `global`**
 ```python
-x = 5
+square(20) # new scope for each function call; variables are not retained.
+# Square of 20 : 400
+# {'base': 20, 'result': 400}
 
-def change():
-    x += 1  #  UnboundLocalError (Python thinks x is local)
+square(10)
+# Square of 10 : 100
+# {'base': 10, 'result': 100}
+
+print(result) # NameError
+'''
+Inference:
+1. Trying to access local var: result outside throws NameError.
+2. Avoid Naming conflicts. 
+3. New scope for each function call.
+
+'''
+
 ```
- **Fix**
-```python
-def change():
-    global x
-    x += 1
+### Nested Functions: Enclosing Scope
+
+1. **Enclosing Scope (or) Nonlocal Scope:** An enclosing scope is created when there is a closure (function nested within a function).
+2. The outer function's local scope is also the inner function's enclosing scope.
+3. Existence of enclosing function is determined by the `__closure__` attribute.
+4. **Lifetime:** Enclosing scope is destroyed when the function returns.
+5. **Nonlocal variables:** Parameters and variables assigned in the outer function are called nonlocal variables.
+6. Nonlocal variables are accessible from the inner function but modification is not allowed.
+7. Using `nonlocal` statement modify enclosing variables.  
+8. **NameError:** Trying to access the local variables outside the function throws `NameError`.
+
+``` python
+def outer_add_numbers():
+    numbers = []
+    count = 0
+    # outer func() - local scope
+    # inner func() - enclosing scope
+    
+    def inner_add_numbers(num):
+        numbers.append(num)
+        print(numbers, count)
+        # nonlocal count
+        count += 1 # throws unboundlocalerror  
+    
+    return inner_add_numbers
+    
+add_num = outer_add_numbers()
+add_num(12) # [12], 0
+add_num(13) # [12, 13], 1
 ```
+
+
+
