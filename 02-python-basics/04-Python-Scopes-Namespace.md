@@ -98,6 +98,53 @@ add_num = outer_add_numbers()
 add_num(12) # [12], 0
 add_num(13) # [12, 13], 1
 ```
+### Module: Global Scope
+1. When a script is run directly (not imported) Python treats it as `__main__` module.
+2. The `__main__` module's namespace is considered as the global scope.
+3. **Lifetime:** Global scope is created when the script starts and destroyed when it ends.
+4. **Global variables:** Top-level variables, functions, and classes exist in the global scope.
+5. Global variables can be accessed and modified anywhere from  the global scope.
+6. To modify a global variable inside a function, use `global`.
+```python
+import random
+
+name = "John"
+age = 20
+
+def greet():
+    name = "Jane"
+    global age
+    age += 30 # UnboundLocalError: cannot access local variable 'age'
+    print(f"Hello {name} {age}!")
+    print(locals()) # {'name': 'Jane'}
+
+greet() 
+# Hello Jane!
+
+print(f"Global Variables: {globals()}") 
+
+'''
+Global Vars: {'__name__': '__main__', 
+'__builtins__': <module 'builtins' (built-in)>, 
+'random': <module 'random'>,
+'name': 'John', 'age': 20, 
+'greet': <function greet at 0x000002178D4004A0>}
+'''
+```
+### builtins: The Built-In Scope
+1. **Built-in Scope:** built-in scope is implemented as a standard module named builtins.
+2. **Lifetime:** Automatically loaded and always available.
+3. Contains built-in functions, constants, and exceptions.
+4. Overriding builtin function results in unexpected behavior.
+
+```python
+print = {"name": "john doe"}
+print(dir())
+
+# print is assigned a dict.
+# TypeError: 'dict' object is not callable.
+```
+   
 
 
 
