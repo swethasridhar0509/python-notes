@@ -1,17 +1,21 @@
 ## Data Types
-- Data type defines the **type of data** stored and **operations** that can be performed on the data.
+- Data type defines the **type of data** stored in an object and **operations** that can be performed on the data.
 - **Purpose:** Ensure valid operations are performed and optimize memory usage.
 
 ## Python Numbers
 - Python supports 3 types of numbers - **Integers, Floating-point numbers,** and **Complex** **numbers**.
-- **Integers:** Numbers whose fractional part is 0. Includes Positive numbers, Negative numbers and zero. **Ex:** 1, 0, -1.
+- **Integers:** Whole Numbers. Includes Positive numbers, Negative numbers and zero. **Ex:** 1, 0, -1.
 - **Floating-point Numbers:** Numbers with a decimal point or in scientific notation. **Ex:** 3.14 and 10e3.
 - **Complex Numbers:** Number with real and imaginary part. **Ex:** 3 + 4j 
 
 ## Python Integers - int
-1. The built-in data type `int` represents **Integers**
-2. In python, integer has no limit, the only constraint is the memory.
+1. The built-in data type **Integers**(`int`) represents whole numbers, both positive and negative, including zero.
+2. **Unlimited Precision:** In python, integer has no limit, the only constraint is the memory.
 3. Use underscores for long numbers. **Ex:** 1_00_000
+4. 
+
+
+
 ### Creating Integers
 1. Directly assigning integer literals to variables. **Ex:** `x = 100`
 2. Using `int()` **Ex:** `x = int(100)`
