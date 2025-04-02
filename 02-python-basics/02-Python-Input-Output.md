@@ -1,5 +1,5 @@
 ## Input / Output
-- **functions** - Resuable block of code that performs a action or task.
+- **Functions** - Resuable block of code that performs an action or task.
 - **Built-in function** - Predefined functions that are built within the **Python Interpreter**. Does not require importing modules.
 - **Input/Output** - Programs need to communicate with the users, whether to get data or to provide results of the program.
 - Built-in function `input()` - captures user input from the keyword.
@@ -7,11 +7,11 @@
 
 ## Print() - Displaying Output
 
-- **Built-in function** that prints the given object(s) to the **standard output stream (console)** or **file**.
-- **Use cases** - debugging and displaying output.
-- Print was a statement in Python 2.
+- **Built-in function** that prints str representation of the given object(s) to the **standard output stream (console)** or **file**.
 - **Syntax:**  `print(*object(s), sep=' ', end='\n', file=sys.stdout, flush=False)`
 - **Returns:** None, prints string representation of the objects passed.
+- **Use cases** - debugging and displaying output.
+- Print was a statement in Python 2.
 ### Parameters
 1.  `*object(s)` - The objects to be printed are passed to the `print()` using `*objects` parameter . `*args` allows a function to accept any no. of. positional arguments as comma separated values. It can be zero, one or more.
   - Internally print calls `str()` of all the objects.
@@ -27,9 +27,9 @@ print(_list, _dict, (_int + _float), print)
 # [1, 2, 3] {1: True, 0: False} 15.5 <built-in function print>
 ```
 2. `sep = " "` **(optional keyword argument) [defaults to single space]**
+- Used to separate multiple arguments.
 - Accepts string or None (default).
 - Appends the string to the end of each object passed to the `print()`.
-- Used to separate multiple arguments.
 - To suppress `sep` use `""`
 
 ```python
@@ -47,10 +47,10 @@ print("05", "09", "2002", sep="-") # 05-09-2002
 ```
 
 3. `end = "\n"` **(optional Keyword argument)[defaults to newline]**
+- Used to prevent line breaks.
 - Accepts string or None (default).
 - Appends the string atlast.
-- Used to prevent line breaks.
-- Calling `print()` - results in a blank line with only one newline character from the end argument. This can be used to introduce vertical space between objects.
+- Calling `print()` - results in a blank line with only one newline character from the end argument. This can be used to introduce horizontal space between objects.
 
 ```python
 fname = "John"
@@ -121,6 +121,7 @@ for i in range(1, 6):
 
 ## Input() - Reading data
 - Takes keyboard input from the user and returns a **string**.
+- **Syntax:** `input(prompt)`
 ### Parameters
 - **prompt(optional)** - Placeholder text to be displayed. Any text (optional) added between the `()`  is passed to the optional **prompt** argument and will be displayed as a prompt.
 ### Working
@@ -174,8 +175,8 @@ print(_float, type(_float)) # 50.9 <class 'float'>
     print(a, b, c) # 21 32 43
     ```
     ```python
-    a = [s.split() for s in input().split()]
-    # 32 21 76
+    a = [s.strip() for s in input().split(',')]
+    # 32, 21, 76
     print(a, type(a)) # ['32', '21', '76'], <class 'list'>
     ```
     ```python

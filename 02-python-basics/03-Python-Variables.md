@@ -1,6 +1,8 @@
 ## **Variable in Python**
 
 - Variables are **named references** to an object stored in the **heap memory**.
+- Unlike other languages, variables does not store objects, variables/names are bind to objects.
+- Objects owns the memory space not the variables.
 - **Purpose** - Eliminate the need to handle memory addresses directly and code reusability.
 - **Properties:** - Variables does not store values, they refer to it and Variables have dynamic type.
 
